@@ -1,0 +1,39 @@
+<div class="col-sm-8 pastrie">
+  <h1>{{ titlePage }}</h1>
+  <!-- Pagination -->
+  <div class="col-sm-4 video">
+    <!-- PastrieDetails communication parent vers enfant -->
+    <app-pastrie-details [pastrie]="selectedPastrie"></app-pastrie-details>
+  </div>
+  <div class="card" *ngFor="let pastrie of pastries">
+    <div class="card-header" (click)="onSelect(pastrie)">
+      {{ pastrie.ref }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ pastrie.name }}</h5>
+      <p class="card-text">{{ pastrie.description }}</p>
+      <ul *ngIf="pastrie.tags" class="list-inline">
+        <li class="list-inline-item" *ngFor="let word of pastrie.tags">
+          <span class="btn-primary badge bg-info">{{ word }}</span>
+        </li>
+      </ul>
+      <a class="btn btn-outline-dark" href="#" role="button">fr</a>
+      <ng-template [ngIf]="pastrie.like">
+        <img
+          class="glyph-icon"
+          src="./assets/svg/si-glyph-heart.svg"
+          alt="like"
+        />
+        <small>{{ pastrie.like }}</small>
+      </ng-template>
+      <ng-template [ngIf]="pastrie.quantity">
+        <img
+          class="glyph-icon"
+          src="./assets/svg/si-glyph-triangle-double-arrow-right.svg"
+          alt="disponibility"
+        />
+        <small>{{ pastrie.quantity }} unités disponibles</small>
+      </ng-template>
+    </div>
+  </div>
+</div>
